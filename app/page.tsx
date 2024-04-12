@@ -1,9 +1,13 @@
-import React from "react";
+import { Icons } from "@/components/icons";
 
 const Home = () => {
   return (
-    <div>
-      <p className="text-red-500 font-bold">Home</p>
+    <div className="mx-auto max-w-md">
+      <Icons.home />
+      <Icons.search />
+      <Icons.create />
+      <Icons.love />
+      <Icons.reply />
     </div>
   );
 };
