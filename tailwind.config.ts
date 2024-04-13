@@ -26,8 +26,9 @@ const config = {
         foreground: "hsl(var(--foreground))",
         okei: {
           primary: "hsl(var(--okei-primary))",
-          secondary: "hsl(var(--okei-primary))",
+          secondary: "hsl(var(--okei-secondary))",
           header_icon: "hsl(var(--okei-header-icon))",
+          foreground: "hsl(var(--okei-foreground))",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",

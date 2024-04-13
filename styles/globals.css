@@ -13,6 +13,7 @@ body,
     --okei-primary: 0 0% 0%;
     --okei-secondary: 0 0% 60%;
     --okei-header-icon: 0 0% 72%;
+    --okei-foreground: 0 0% 96%;
 
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
@@ -49,6 +50,7 @@ body,
     --okei-primary: 210 20% 96%;
     --okei-secondary: 0 0% 47%;
     --okei-header-icon: 0 0% 30%;
+    --okei-foreground: 0 0% 12%;
 
     --background: 20 14.3% 4.1%;
     --foreground: 60 9.1% 97.8%;
