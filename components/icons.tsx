@@ -17,6 +17,7 @@ export const Icons = {
       <path
         clipRule="evenodd"
         d="M3.5 11.5C3.5 7.08172 7.08172 3.5 11.5 3.5C15.9183 3.5 19.5 7.08172 19.5 11.5C19.5 15.9183 15.9183 19.5 11.5 19.5C7.08172 19.5 3.5 15.9183 3.5 11.5ZM11.5 1C5.70101 1 1 5.70101 1 11.5C1 17.299 5.70101 22 11.5 22C13.949 22 16.2023 21.1615 17.9883 19.756L22.3661 24.1339C22.8543 24.622 23.6457 24.622 24.1339 24.1339C24.622 23.6457 24.622 22.8543 24.1339 22.3661L19.756 17.9883C21.1615 16.2023 22 13.949 22 11.5C22 5.70101 17.299 1 11.5 1Z"
+        strokeWidth="0.2"
         fillRule="evenodd"
       ></path>
     </svg>
@@ -50,6 +51,23 @@ export const Icons = {
     <svg aria-label="Reply" role="img" viewBox="0 0 24 24" {...props}>
       <title>Reply</title>
       <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"></path>
+    </svg>
+  ),
+  profile: (props: LucideProps) => (
+    <svg aria-label="Profile" role="img" viewBox="0 0 26 26" {...props}>
+      <title>Profile</title>
+      <circle cx="13" cy="7.25" r="4" strokeWidth="2.5"></circle>
+      <path
+        d="M6.26678 23.75H19.744C21.603 23.75 22.5 23.2186 22.5 22.0673C22.5 19.3712 18.8038 15.75 13 15.75C7.19625 15.75 3.5 19.3712 3.5 22.0673C3.5 23.2186 4.39704 23.75 6.26678 23.75Z"
+        strokeWidth="2.5"
+      ></path>
+    </svg>
+  ),
+  hamburger: (props: LucideProps) => (
+    <svg aria-label="Menu" role="img" viewBox="0 0 24 24" {...props}>
+      <title>Menu</title>
+      <rect rx="1.25" x="3" y="7"></rect>
+      <rect rx="1.25" x="10" y="15"></rect>
     </svg>
   ),
 };
