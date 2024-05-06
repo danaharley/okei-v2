@@ -15,7 +15,7 @@ const RegisterPage = () => {
         <div className="text-sm font-light text-okei-secondary">
           Already have an account?{" "}
           <Link
-            href="/login"
+            href="/auth/login"
             className="font-semibold text-okei-primary underline"
           >
             Sign in

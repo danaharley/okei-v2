@@ -55,7 +55,7 @@ export const LoginForm = () => {
               <FormControl>
                 <Input
                   type="text"
-                  placeholder="Username, phone, or email"
+                  placeholder="Email"
                   className="h-full w-full rounded-xl border-transparent bg-okei-foreground p-4 text-[15px] text-okei-primary placeholder:font-light placeholder:text-okei-secondary focus-visible:border focus-visible:border-okei-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0"
                   {...field}
                 />
