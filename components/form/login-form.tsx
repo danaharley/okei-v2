@@ -1,7 +1,9 @@
 "use client";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { ZodType, z } from "zod";
+import { ElementRef, useRef } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { toast } from "sonner";
 
 import {
   Form,
@@ -14,42 +16,56 @@ import { Input } from "@/components/ui/input";
 import { SubmitForm } from "@/components/form/submit-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "@/hooks/use-action";
 
-const LoginSchema: ZodType = z.object({
-  username: z
-    .string({
-      required_error: "Username is required",
-      invalid_type_error: "Username is required",
-    })
-    .min(2, { message: "Username must be more than 2 characters" })
-    .email("This is not a valid email."),
-  password: z.string({
-    required_error: "Password is required",
-    invalid_type_error: "Password is required",
-  }),
-});
+import { LoginSchema } from "@/actions/login/schema";
+import { login } from "@/actions/login";
 
 type FormSchemaType = z.output<typeof LoginSchema>;
 
 export const LoginForm = () => {
+  const formRef = useRef<ElementRef<"form">>(null);
+
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
 
-  const onSubmit: SubmitHandler<FormSchemaType> = (e) => {
-    console.log(e);
+  const { execute } = useAction(login, {
+    onSuccess: () => {
+      toast.success("Logged in successfully.");
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  const onSubmitAction = (formData: FormData) => {
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    execute({ email, password });
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form
+        ref={formRef}
+        action={onSubmitAction}
+        onSubmit={(e) => {
+          e.preventDefault();
+          form.handleSubmit(() => {
+            onSubmitAction(new FormData(formRef.current!));
+          })(e);
+        }}
+        className="space-y-2"
+      >
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormControl>

@@ -17,6 +17,8 @@ import { MainVav } from "@/components/main-nav";
 
 import { cn } from "@/lib/utils";
 
+import { logout } from "@/actions/logout";
+
 export const Header = () => {
   const pathname = usePathname();
 
@@ -93,6 +95,10 @@ export const Header = () => {
     [pathname],
   );
 
+  const onClick = () => {
+    logout();
+  };
+
   return (
     <header className="fixed top-0 z-40 w-full max-w-[1230px]">
       <div className="grid h-[60px] grid-cols-3 bg-background md:h-[74px] md:grid-cols-[auto_620px_auto]">
@@ -114,15 +120,18 @@ export const Header = () => {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-auto" align="end" alignOffset={18}>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:cursor-pointer">
               <Menu className="mr-2 h-4 w-4" />
               <span>Mode</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:cursor-pointer">
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              className="hover:cursor-pointer"
+              onClick={onClick}
+            >
               <LogOut className="mr-2 h-4 w-4" />
               <span>Logout</span>
             </DropdownMenuItem>
