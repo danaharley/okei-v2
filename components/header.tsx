@@ -2,7 +2,8 @@
 
 import { useMemo } from "react";
 import { usePathname } from "next/navigation";
-import { LogOut, Menu, Settings } from "lucide-react";
+import { useTheme } from "next-themes";
+import { LogOut, Menu, Moon, Settings, Sun } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import {
@@ -21,6 +22,8 @@ import { logout } from "@/actions/logout";
 
 export const Header = () => {
   const pathname = usePathname();
+
+  const { setTheme, theme } = useTheme();
 
   const routes = useMemo(
     () => [
@@ -44,7 +47,7 @@ export const Header = () => {
         icon: (
           <Icons.search
             className={cn(
-              "size-[26px] fill-[#b8b8b8] stroke-okei-header_icon",
+              "size-[26px] fill-[#b8b8b8] stroke-okei-header_icon dark:fill-okei-header_icon",
               pathname === "/search" && "fill-okei-primary stroke-okei-primary",
             )}
           />
@@ -120,9 +123,19 @@ export const Header = () => {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-auto" align="end" alignOffset={18}>
-            <DropdownMenuItem className="hover:cursor-pointer">
-              <Menu className="mr-2 h-4 w-4" />
-              <span>Mode</span>
+            <DropdownMenuItem
+              className="hover:cursor-pointer"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            >
+              <div className="flex flex-row items-center dark:hidden ">
+                <Moon className="mr-2 h-4 w-4" />
+                <span>Dark Mode</span>
+              </div>
+
+              <div className="hidden flex-row items-center dark:flex">
+                <Sun className="mr-2 h-4 w-4" />
+                <span>Light Mode</span>
+              </div>
             </DropdownMenuItem>
             <DropdownMenuItem className="hover:cursor-pointer">
               <Settings className="mr-2 h-4 w-4" />

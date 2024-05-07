@@ -33,12 +33,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       switch (error.type) {
         case "CredentialsSignin":
           return {
-            error: "Invalid credentials.",
+            error: "Invalid credentials",
           };
 
         default:
           return {
-            error: "Something went wrong.",
+            error: "Something went wrong",
           };
       }
     }
