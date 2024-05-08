@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { LoginForm } from "@/components/form/login-form";
+import { FormLogin } from "@/components/form/form-login";
 import { Logo } from "@/components/logo";
 
 const LoginPage = () => {
@@ -11,7 +11,7 @@ const LoginPage = () => {
         <p className="pb-1 text-center text-base font-semibold text-okei-primary">
           Log in to your account
         </p>
-        <LoginForm />
+        <FormLogin />
         <div className="text-sm font-light text-okei-secondary">
           Don&apos;t have an account?{" "}
           <Link

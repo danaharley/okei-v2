@@ -26,7 +26,7 @@ import { register } from "@/actions/register";
 
 type FormSchemaType = z.output<typeof RegisterSchema>;
 
-export const RegisterForm = () => {
+export const FormRegister = () => {
   const router = useRouter();
 
   const formRef = useRef<ElementRef<"form">>(null);
@@ -41,7 +41,7 @@ export const RegisterForm = () => {
     },
   });
 
-  const { execute } = useAction(register, {
+  const { execute, isLoading } = useAction(register, {
     onSuccess: () => {
       toast.success("User created.");
       formRef.current?.reset();
@@ -84,6 +84,7 @@ export const RegisterForm = () => {
                   type="text"
                   placeholder="Name"
                   className="h-full w-full rounded-xl border-transparent bg-okei-foreground p-4 text-[15px] text-okei-primary placeholder:font-light placeholder:text-okei-secondary focus-visible:border focus-visible:border-okei-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  disabled={isLoading}
                   {...field}
                 />
                 {/* <FormInput
@@ -107,6 +108,7 @@ export const RegisterForm = () => {
                   type="text"
                   placeholder="Email"
                   className="h-full w-full rounded-xl border-transparent bg-okei-foreground p-4 text-[15px] text-okei-primary placeholder:font-light placeholder:text-okei-secondary focus-visible:border focus-visible:border-okei-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  disabled={isLoading}
                   {...field}
                 />
                 {/* <FormInput
@@ -130,6 +132,7 @@ export const RegisterForm = () => {
                   type="text"
                   placeholder="Username"
                   className="h-full w-full rounded-xl border-transparent bg-okei-foreground p-4 text-[15px] text-okei-primary placeholder:font-light placeholder:text-okei-secondary focus-visible:border focus-visible:border-okei-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  disabled={isLoading}
                   {...field}
                 />
                 {/* <FormInput
@@ -153,6 +156,7 @@ export const RegisterForm = () => {
                   type="password"
                   placeholder="Password"
                   className="h-full w-full rounded-xl border-transparent bg-okei-foreground p-4 text-[15px] text-okei-primary placeholder:font-light placeholder:text-okei-secondary focus-visible:border focus-visible:border-okei-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  disabled={isLoading}
                   {...field}
                 />
                 {/* <FormInput
@@ -167,7 +171,10 @@ export const RegisterForm = () => {
             </FormItem>
           )}
         />
-        <SubmitForm className="h-full w-full rounded-xl p-4">
+        <SubmitForm
+          className="h-full w-full rounded-xl p-4"
+          disabled={isLoading}
+        >
           Sign up
         </SubmitForm>
       </form>

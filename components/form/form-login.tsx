@@ -23,7 +23,7 @@ import { login } from "@/actions/login";
 
 type FormSchemaType = z.output<typeof LoginSchema>;
 
-export const LoginForm = () => {
+export const FormLogin = () => {
   const formRef = useRef<ElementRef<"form">>(null);
 
   const form = useForm<FormSchemaType>({
@@ -34,7 +34,7 @@ export const LoginForm = () => {
     },
   });
 
-  const { execute } = useAction(login, {
+  const { execute, isLoading } = useAction(login, {
     onSuccess: () => {
       toast.success("Logged in successfully.");
     },
@@ -73,6 +73,7 @@ export const LoginForm = () => {
                   type="text"
                   placeholder="Email"
                   className="h-full w-full rounded-xl border-transparent bg-okei-foreground p-4 text-[15px] text-okei-primary placeholder:font-light placeholder:text-okei-secondary focus-visible:border focus-visible:border-okei-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  disabled={isLoading}
                   {...field}
                 />
               </FormControl>
@@ -90,6 +91,7 @@ export const LoginForm = () => {
                   type="password"
                   placeholder="Password"
                   className="h-full w-full rounded-xl border-transparent bg-okei-foreground p-4 text-[15px] text-okei-primary placeholder:font-light placeholder:text-okei-secondary focus-visible:border focus-visible:border-okei-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  disabled={isLoading}
                   {...field}
                 />
               </FormControl>
@@ -97,7 +99,12 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <SubmitForm className="h-full w-full rounded-xl p-4">Log in</SubmitForm>
+        <SubmitForm
+          disabled={isLoading}
+          className="h-full w-full rounded-xl p-4"
+        >
+          Log in
+        </SubmitForm>
       </form>
     </Form>
   );

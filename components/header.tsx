@@ -107,9 +107,9 @@ export const Header = () => {
       <div className="grid h-[60px] grid-cols-3 bg-background md:h-[74px] md:grid-cols-[auto_620px_auto]">
         <Link
           href="/"
-          className="col-start-2 place-self-center self-center md:col-start-1 md:ml-4 md:place-self-auto md:self-center xl:ml-0"
+          className="col-start-2 cursor-default place-self-center self-center md:col-start-1 md:ml-4 md:place-self-auto md:self-center xl:ml-0"
         >
-          <Logo className="size-9" />
+          <Logo className="size-9 hover:cursor-pointer" />
         </Link>
         <MainVav
           routes={routes}

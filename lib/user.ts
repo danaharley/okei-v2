@@ -23,3 +23,13 @@ export const getUserByUsername = async (
     return null;
   }
 };
+
+export const getUserByUserId = async (id: string): Promise<User | null> => {
+  try {
+    const user = await db.user.findUnique({ where: { id } });
+
+    return user;
+  } catch {
+    return null;
+  }
+};

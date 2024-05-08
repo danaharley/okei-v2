@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { RegisterForm } from "@/components/form/register-form";
+import { FormRegister } from "@/components/form/form-register";
 import { Logo } from "@/components/logo";
 
 const RegisterPage = () => {
@@ -11,7 +11,7 @@ const RegisterPage = () => {
         <p className="pb-1 text-center text-base font-semibold text-okei-primary">
           Create your account
         </p>
-        <RegisterForm />
+        <FormRegister />
         <div className="text-sm font-light text-okei-secondary">
           Already have an account?{" "}
           <Link
