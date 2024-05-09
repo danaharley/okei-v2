@@ -1,11 +1,16 @@
-import { currentUser } from "@/lib/auth";
+import { Post } from "@/components/post/post";
+import { PostInput } from "@/components/post/post-input";
+import { Tab } from "@/components/tab";
 
-const SitePage = async () => {
-  const session = await currentUser();
-
+const SitePage = () => {
   return (
     <div className="mx-auto max-w-[620px] pt-[60px] md:pt-[74px]">
-      <p>{JSON.stringify(session)}</p>
+      <PostInput />
+      <Tab />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </div>
   );
 };

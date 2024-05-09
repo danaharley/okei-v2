@@ -1,5 +1,9 @@
 import { LucideProps } from "lucide-react";
 
+type iconsProps = {
+  strokeW?: string | number | undefined;
+} & LucideProps;
+
 export const Icons = {
   home: (props: LucideProps) => (
     <svg aria-label="Home" role="img" viewBox="0 0 26 26" {...props}>
@@ -38,19 +42,22 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  love: (props: LucideProps) => (
+  love: ({ strokeW, ...props }: iconsProps) => (
     <svg aria-label="Notifications" role="img" viewBox="0 0 26 26" {...props}>
       <title>Notifications</title>
       <path
         d="M2.5 9.85683C2.5 14.224 6.22178 18.5299 12.0332 22.2032C12.3554 22.397 12.7401 22.5909 13 22.5909C13.2703 22.5909 13.655 22.397 13.9668 22.2032C19.7782 18.5299 23.5 14.224 23.5 9.85683C23.5 6.11212 20.8698 3.5 17.4599 3.5C15.4847 3.5 13.9356 4.39792 13 5.74479C12.0851 4.40812 10.5257 3.5 8.5401 3.5C5.14059 3.5 2.5 6.11212 2.5 9.85683Z"
-        strokeWidth="2.5"
+        strokeWidth={strokeW ? strokeW : "2.5"}
       ></path>
     </svg>
   ),
-  reply: (props: LucideProps) => (
+  reply: ({ strokeW, ...props }: iconsProps) => (
     <svg aria-label="Reply" role="img" viewBox="0 0 24 24" {...props}>
       <title>Reply</title>
-      <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"></path>
+      <path
+        d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
+        strokeWidth={strokeW ? strokeW : "2.5"}
+      ></path>
     </svg>
   ),
   profile: (props: LucideProps) => (
