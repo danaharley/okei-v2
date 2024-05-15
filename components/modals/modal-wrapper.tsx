@@ -20,19 +20,17 @@ export const ModalWrapper = ({
 }: ModalWrapperProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <div>
-        <DialogContent className="flex h-full max-w-2xl flex-col md:max-h-96">
-          <div className="absolute -top-16 right-1/2 hidden translate-x-1/2 translate-y-1/2 text-white md:block">
-            <span className="font-semibold">{title}</span>
-          </div>
-          <DialogHeader className="md:hidden">
-            <DialogTitle className="text-center text-base font-bold text-okei-primary">
-              {title}
-            </DialogTitle>
-          </DialogHeader>
-          {children}
-        </DialogContent>
-      </div>
+      <DialogContent className="flex h-full max-w-2xl flex-col overflow-hidden p-0 md:max-h-[36rem]">
+        <div className="absolute -top-16 right-1/2 hidden translate-x-1/2 translate-y-1/2 text-white md:block">
+          <span className="font-semibold">{title}</span>
+        </div>
+        <DialogHeader className="md:hidden">
+          <DialogTitle className="mt-3 text-center text-base font-bold text-okei-primary md:mt-0">
+            {title}
+          </DialogTitle>
+        </DialogHeader>
+        {children}
+      </DialogContent>
     </Dialog>
   );
 };
