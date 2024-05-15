@@ -4,7 +4,7 @@ import { Tab } from "@/components/tab";
 
 const SitePage = () => {
   return (
-    <div className="mx-auto max-w-[620px] pt-[60px] md:pt-[74px]">
+    <div className="mx-auto max-w-[620px] pb-20 pt-[60px] md:pb-0 md:pt-[74px]">
       <PostInput />
       <Tab />
       <Post />

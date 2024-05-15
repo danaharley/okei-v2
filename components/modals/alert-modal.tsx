@@ -7,6 +7,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Separator } from "../ui/separator";
 
 type AlertModalProps = {
   open: boolean;
@@ -29,20 +30,22 @@ export const AlertModal = ({
             {title}
           </AlertDialogTitle>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel
+        <Separator />
+        <div className="flex items-center hover:cursor-pointer">
+          <div
+            className="flex h-14 w-full items-center justify-center px-8 hover:bg-okei-secondary/10"
             onClick={onCancel}
-            className="rounded-none px-10 py-7 text-base"
           >
             Cancel
-          </AlertDialogCancel>
-          <AlertDialogAction
+          </div>
+          <Separator orientation="vertical" />
+          <div
+            className="flex h-14 w-full items-center justify-center px-8 font-semibold text-destructive hover:bg-okei-secondary/10"
             onClick={onConfirm}
-            className="rounded-none border-l-0 px-10 py-7 text-base font-bold text-destructive hover:text-destructive"
           >
             Discard
-          </AlertDialogAction>
-        </AlertDialogFooter>
+          </div>
+        </div>
       </AlertDialogContent>
     </AlertDialog>
   );
