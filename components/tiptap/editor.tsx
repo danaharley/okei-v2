@@ -9,9 +9,10 @@ import { Toolbar } from "@/components/tiptap/toolbar";
 type EditorProps = {
   content: string;
   onChange: (value: string) => void;
+  disabled?: boolean;
 };
 
-export const Editor = ({ content, onChange }: EditorProps) => {
+export const Editor = ({ content, onChange, disabled }: EditorProps) => {
   const editor = useEditor({
     content,
     onUpdate({ editor }) {
@@ -43,7 +44,7 @@ export const Editor = ({ content, onChange }: EditorProps) => {
 
   return (
     <>
-      <Toolbar editor={editor} />
+      <Toolbar editor={editor} disabled={disabled} />
       <EditorContent editor={editor} />
     </>
   );

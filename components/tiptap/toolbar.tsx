@@ -5,14 +5,16 @@ import { Toggle } from "@/components/ui/toggle";
 
 type ToolbarProps = {
   editor?: Editor | null;
+  disabled?: boolean;
 };
 
-export const Toolbar = ({ editor }: ToolbarProps) => {
+export const Toolbar = ({ editor, disabled }: ToolbarProps) => {
   if (!editor) return null;
 
   return (
     <div className="absolute right-6 top-2.5 flex items-center space-x-1.5 md:top-3.5 md:mt-6">
       <Toggle
+        disabled={disabled}
         aria-label="Toggle Heading"
         size="sm"
         pressed={editor.isActive("heading")}
@@ -23,6 +25,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
         <Heading1 className="h-4 w-4" />
       </Toggle>
       <Toggle
+        disabled={disabled}
         aria-label="Toggle Bold"
         size="sm"
         pressed={editor.isActive("bold")}
@@ -31,6 +34,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
         <Bold className="h-4 w-4" />
       </Toggle>
       <Toggle
+        disabled={disabled}
         aria-label="Toggle Italic"
         size="sm"
         pressed={editor.isActive("italic")}
