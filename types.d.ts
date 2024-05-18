@@ -1,6 +1,6 @@
 import { type DefaultSession } from "next-auth";
 import { JWT } from "next-auth/jwt";
-import { UserRole } from "@prisma/client";
+import { Post, User, UserRole } from "@prisma/client";
 
 declare module "next-auth" {
   /**
@@ -19,3 +19,5 @@ declare module "next-auth/jwt" {
     role: UserRole;
   }
 }
+
+export type PostWithUser = Post & { user: User };

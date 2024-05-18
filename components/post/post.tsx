@@ -1,5 +1,8 @@
+"use client";
+
 import { Fragment } from "react";
 import { Dot, Ellipsis, Trash } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -13,17 +16,29 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { db } from "@/lib/db";
+import { useAction } from "@/hooks/use-action";
 
-export const Post = async () => {
-  const posts = await db.post.findMany({
-    include: {
-      user: true,
+import { deletePost } from "@/actions/post/delete";
+
+import { PostWithUser } from "@/types";
+
+type PostProps = {
+  posts: PostWithUser[];
+};
+
+export const Post = ({ posts }: PostProps) => {
+  const { execute } = useAction(deletePost, {
+    onSuccess: () => {
+      toast.success("Post deleted.");
     },
-    orderBy: {
-      createdAt: "desc",
+    onError: (error) => {
+      toast.error(error);
     },
   });
+
+  const onDelete = (id: string) => {
+    execute({ id });
+  };
 
   return (
     <>
@@ -72,7 +87,10 @@ export const Post = async () => {
                       align="end"
                       alignOffset={8}
                     >
-                      <DropdownMenuItem className="hover:cursor-pointer">
+                      <DropdownMenuItem
+                        className="hover:cursor-pointer"
+                        onClick={() => onDelete(post.id)}
+                      >
                         <Trash className="mr-2 h-4 w-4 text-destructive" />
                         <span className="text-destructive">Delete</span>
                       </DropdownMenuItem>

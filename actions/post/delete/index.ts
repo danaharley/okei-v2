@@ -5,34 +5,50 @@ import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { getPostById } from "@/lib/post";
 
 import { InputType, ReturnType } from "./types";
-import { CreatePostSchema } from "./schema";
+import { DeletePost } from "./schema";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-  const { content } = data;
+  const { id } = data;
 
   const user = await currentUser();
 
-  if (!user)
+  if (!user) {
     return {
       error: "Unauthenticated.",
     };
+  }
+
+  const existingPost = await getPostById(id);
+
+  if (!existingPost) {
+    return {
+      error: "No post.",
+    };
+  }
+
+  if (existingPost.userId !== user.id) {
+    return {
+      error: "You're not authorized to perform this action.",
+    };
+  }
 
   let post;
 
   try {
-    post = await db.post.create({
-      data: {
-        content,
-        userId: user.id!,
+    post = await db.post.delete({
+      where: {
+        id,
+        userId: user.id,
       },
     });
   } catch (error) {
     console.log({ error });
 
     return {
-      error: "Failed to create post.",
+      error: "Failed to delete post.",
     };
   }
 
@@ -40,4 +56,5 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   return { data: post };
 };
-export const createPost = createSafeAction(CreatePostSchema, handler);
+
+export const deletePost = createSafeAction(DeletePost, handler);
