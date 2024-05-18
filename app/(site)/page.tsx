@@ -8,9 +8,6 @@ const SitePage = () => {
       <PostInput />
       <Tab />
       <Post />
-      <Post />
-      <Post />
-      <Post />
     </div>
   );
 };

@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { createSafeAction } from "@/lib/create-safe-action";
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -10,8 +12,6 @@ import { InputType, ReturnType } from "./types";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { content } = data;
-
-  console.log("data :", content);
 
   const user = await currentUser();
 
@@ -34,6 +34,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
     throw error;
   }
+
+  revalidatePath("/");
 
   return { data: post };
 };
