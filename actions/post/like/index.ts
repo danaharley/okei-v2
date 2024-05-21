@@ -3,12 +3,13 @@
 import { revalidatePath } from "next/cache";
 
 import { createSafeAction } from "@/lib/create-safe-action";
+import { getPostById } from "@/lib/post";
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getPostById } from "@/lib/post";
 
 import { InputType, ReturnType } from "./types";
-import { DeletePostSchema } from "./schema";
+
+import { LikePostSchema } from "./schema";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { id } = data;
@@ -31,36 +32,45 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!existingPost) {
     return {
-      error: "No post.",
+      error: "No Post.",
     };
   }
 
-  if (existingPost.userId !== user.id) {
-    return {
-      error: "You're not authorized to perform this action.",
-    };
-  }
-
-  let post;
+  let liked;
 
   try {
-    post = await db.post.delete({
+    const liked = await db.like.findFirst({
       where: {
-        id,
+        postId: existingPost.id,
         userId: user.id,
       },
     });
+
+    if (liked) {
+      await db.like.delete({
+        where: {
+          id: liked.id,
+        },
+      });
+    } else {
+      await db.like.create({
+        data: {
+          postId: existingPost.id!,
+          userId: user.id!,
+        },
+      });
+    }
   } catch (error) {
     console.log({ error });
 
     return {
-      error: "Failed to delete post.",
+      error: "Failed to like post.",
     };
   }
 
   revalidatePath("/");
 
-  return { data: post };
+  return { data: liked };
 };
 
-export const deletePost = createSafeAction(DeletePostSchema, handler);
+export const likePost = createSafeAction(LikePostSchema, handler);

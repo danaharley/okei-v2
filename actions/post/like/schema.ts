@@ -1,5 +1,5 @@
 import * as z from "zod";
 
-export const DeletePostSchema = z.object({
+export const LikePostSchema = z.object({
   id: z.string(),
 });

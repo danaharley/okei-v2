@@ -29,6 +29,7 @@ model User {
   role          UserRole  @default(USER)
 
   posts Post[]
+  Like  Like[]
 
   @@map("users")
 }
@@ -37,7 +38,18 @@ model Post {
   id        String   @id @default(cuid())
   content   String   @db.Text
   userId    String
+  likes     Like[]
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
