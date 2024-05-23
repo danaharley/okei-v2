@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import * as React from "react";
 
 import { Separator } from "@/components/ui/separator";
 import { PostContent } from "@/components/post/post-content";
@@ -15,13 +15,13 @@ export const Post = ({ user, posts }: PostProps) => {
   return (
     <>
       {posts.map((post) => (
-        <Fragment key={post.id}>
+        <React.Fragment key={post.id}>
           <div className="m-3 flex flex-col md:mx-0 md:my-3">
             <PostContent user={user} post={post} />
             <PostInfo likes={post.likes} />
           </div>
           <Separator />
-        </Fragment>
+        </React.Fragment>
       ))}
     </>
   );

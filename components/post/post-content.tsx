@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import * as React from "react";
 import { Ellipsis, Trash } from "lucide-react";
 import { toast } from "sonner";
 
@@ -31,26 +31,7 @@ type PostContentProps = {
 };
 
 export const PostContent = ({ user, post }: PostContentProps) => {
-  const { execute: executeDelete } = useAction(deletePost, {
-    onSuccess: () => {
-      toast.success("Post deleted.");
-    },
-    onError: (error) => {
-      toast.error(error);
-    },
-  });
-
-  const { execute: executeLike } = useAction(likePost, {
-    onSuccess: (data) => {
-      console.log(data);
-      toast.success("Liked.");
-    },
-    onError: (error) => {
-      toast.error(error);
-    },
-  });
-
-  const hasLiked = useMemo(() => {
+  const hasLiked = React.useMemo(() => {
     const likedLists = post.likes;
 
     const lists = [];
@@ -61,6 +42,24 @@ export const PostContent = ({ user, post }: PostContentProps) => {
 
     return lists.includes(user.id);
   }, [post.likes, user.id]);
+
+  const { execute: executeDelete } = useAction(deletePost, {
+    onSuccess: () => {
+      toast.success("Post deleted.");
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  const { execute: executeLike } = useAction(likePost, {
+    onSuccess: () => {
+      hasLiked ? toast.success("Unliked.") : toast.success("Liked.");
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
 
   const onDelete = (id: string) => {
     executeDelete({ id });

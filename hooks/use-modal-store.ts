@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type ModalType = "createPost";
+type ModalType = "createPost" | "createPost";
 
 type ModalStore = {
   type: ModalType | null;

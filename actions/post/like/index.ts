@@ -36,24 +36,24 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  let liked;
+  const liked = await db.like.findFirst({
+    where: {
+      postId: existingPost.id,
+      userId: user.id,
+    },
+  });
+
+  let updateLiked;
 
   try {
-    const liked = await db.like.findFirst({
-      where: {
-        postId: existingPost.id,
-        userId: user.id,
-      },
-    });
-
     if (liked) {
-      await db.like.delete({
+      updateLiked = await db.like.delete({
         where: {
           id: liked.id,
         },
       });
     } else {
-      await db.like.create({
+      updateLiked = await db.like.create({
         data: {
           postId: existingPost.id!,
           userId: user.id!,
@@ -70,7 +70,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   revalidatePath("/");
 
-  return { data: liked };
+  return { data: updateLiked };
 };
 
 export const likePost = createSafeAction(LikePostSchema, handler);

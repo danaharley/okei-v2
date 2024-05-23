@@ -28,20 +28,22 @@ model User {
   password      String?
   role          UserRole  @default(USER)
 
-  posts Post[]
-  Like  Like[]
+  posts    Post[]
+  likes    Like[]
+  comments Comment[]
 
   @@map("users")
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  content   String   @db.Text
+  id        String    @id @default(cuid())
+  content   String    @db.Text
   userId    String
   likes     Like[]
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  comments  Comment[]
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Like {
@@ -52,4 +54,13 @@ model Like {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id      String @id @default(cuid())
+  content String @db.Text
+  userId  String
+  postId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 }

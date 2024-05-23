@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -27,7 +27,7 @@ import { CreatePostSchema } from "@/actions/post/create/schema";
 type FormSchemaType = z.output<typeof CreatePostSchema>;
 
 export const CreatePostModal = () => {
-  const [alertModal, setAlertModal] = useState(false);
+  const [alertModal, setAlertModal] = React.useState(false);
 
   const { isOpen, type, onClose } = useModalStore();
 
@@ -90,7 +90,7 @@ export const CreatePostModal = () => {
             e.preventDefault();
             form.handleSubmit(onSubmit)(e);
           }}
-          className="relative flex h-full flex-col"
+          className="relative flex h-full flex-col rounded-tl-2xl rounded-tr-2xl"
         >
           <div className="mx-6 flex h-14 shrink-0 items-center md:mt-6 md:h-16">
             <UserAvatar
@@ -100,7 +100,7 @@ export const CreatePostModal = () => {
             <p className="font-medium text-okei-primary">danaharliansyah</p>
           </div>
           <Separator className="bg-okei-secondary/30" />
-          <div className="min-h- mx-6 my-6 mb-32 overflow-y-auto md:mb-20">
+          <div className="mx-6 my-6 mb-32 overflow-y-auto md:mb-20">
             <FormField
               control={form.control}
               name="content"
@@ -118,7 +118,7 @@ export const CreatePostModal = () => {
               )}
             />
           </div>
-          <div className="fixed bottom-0 flex h-20 w-full items-center bg-background">
+          <div className="fixed bottom-0 flex h-20 w-full items-center rounded-bl-2xl rounded-br-2xl bg-background">
             <SubmitForm
               disabled={disabled}
               className="ml-auto mr-6 rounded-3xl text-[15px]"
