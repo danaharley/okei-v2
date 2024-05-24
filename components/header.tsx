@@ -1,20 +1,16 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { LogOut, Menu, Moon, Settings, Sun } from "lucide-react";
+import { LogOut, Menu, Moon, Search, Settings, Sun } from "lucide-react";
 
 import { Logo } from "@/components/logo";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 import { Icons } from "@/components/icons";
 import { MainVav } from "@/components/main-nav";
+import { ActionMenu } from "@/components/action-menu";
+import { ButtonIcon } from "@/components/button-icon";
 
 import { cn } from "@/lib/utils";
 
@@ -45,14 +41,27 @@ export const Header = () => {
         href: "/search",
         active: pathname === "/search",
         icon: (
-          <Icons.search
+          <Search
             className={cn(
-              "size-[26px] fill-[#b8b8b8] stroke-okei-header_icon dark:fill-okei-header_icon",
-              pathname === "/search" && "fill-okei-primary stroke-okei-primary",
+              "size-[26px] stroke-okei-header_icon",
+              pathname === "/search" && "stroke-okei-primary",
             )}
           />
         ),
       },
+      // {
+      //   label: "Search",
+      //   href: "/search",
+      //   active: pathname === "/search",
+      //   icon: (
+      //     <Icons.search
+      //       className={cn(
+      //         "size-[26px] fill-[#b8b8b8] stroke-okei-header_icon dark:fill-okei-header_icon",
+      //         pathname === "/search" && "fill-okei-primary stroke-okei-primary",
+      //       )}
+      //     />
+      //   ),
+      // },
       {
         label: "Create",
         href: "/create",
@@ -116,40 +125,34 @@ export const Header = () => {
           className="fixed bottom-0 w-full bg-background md:hidden"
         />
         <MainVav routes={routes} className="hidden md:block" />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div className="place-self-end self-center p-4 hover:cursor-pointer ">
-              <Menu className="text-okei-header_icon transition hover:text-okei-primary" />
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-auto" align="end" alignOffset={18}>
-            <DropdownMenuItem
-              className="hover:cursor-pointer"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            >
-              <div className="flex flex-row items-center dark:hidden ">
-                <Moon className="mr-2 h-4 w-4" />
-                <span>Dark Mode</span>
-              </div>
-
-              <div className="hidden flex-row items-center dark:flex">
-                <Sun className="mr-2 h-4 w-4" />
-                <span>Light Mode</span>
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="hover:cursor-pointer">
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="hover:cursor-pointer"
-              onClick={onClick}
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Logout</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ActionMenu
+          align="end"
+          alignOffset={8}
+          icon={Menu}
+          className="place-self-end self-center p-4 hover:cursor-pointer"
+          iconStyle="group-hover:text-okei-primary h-5 w-5 text-sm"
+        >
+          <ButtonIcon
+            icon={theme === "light" ? Moon : Sun}
+            title={theme === "light" ? "Dark Mode" : "Light Mode"}
+            className="h-full w-full justify-start border-none p-1.5"
+            iconStyle="mr-2"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          />
+          <ButtonIcon
+            icon={Settings}
+            title="Settings"
+            className="h-full w-full justify-start border-none p-1.5"
+            iconStyle="mr-2"
+          />
+          <ButtonIcon
+            icon={LogOut}
+            title="Logout"
+            className="h-full w-full justify-start border-none p-1.5 text-destructive hover:text-destructive"
+            iconStyle="mr-2 text-destructive"
+            onClick={onClick}
+          />
+        </ActionMenu>
       </div>
     </header>
   );

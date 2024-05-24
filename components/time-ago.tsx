@@ -23,23 +23,24 @@ export const TimeAgo = ({ timestamp, className }: TimeAgoProps) => {
       const month = 30 * day;
       const year = 365 * day;
 
+      // example setTimeAgo(`${minutes} minute${minutes > 1 ? "s" : ""} ago`); 1 minutes ago
       if (timeDifference < minute) {
-        setTimeAgo("a few seconds ago");
+        setTimeAgo("a few second ago");
       } else if (timeDifference < hour) {
         const minutes = Math.floor(timeDifference / minute);
-        setTimeAgo(`${minutes} minute${minutes > 1 ? "s" : ""} ago`);
+        setTimeAgo(`${minutes}m${minutes > 1 ? "" : ""}`);
       } else if (timeDifference < day) {
         const hours = Math.floor(timeDifference / hour);
-        setTimeAgo(`${hours} hour${hours > 1 ? "s" : ""} ago`);
+        setTimeAgo(`${hours}h${hours > 1 ? "" : ""}`);
       } else if (timeDifference < month) {
         const days = Math.floor(timeDifference / day);
-        setTimeAgo(`${days} day${days > 1 ? "s" : ""} ago`);
+        setTimeAgo(`${days}d${days > 1 ? "" : ""}`);
       } else if (timeDifference < year) {
         const months = Math.floor(timeDifference / month);
-        setTimeAgo(`${months} month${months > 1 ? "s" : ""} ago`);
+        setTimeAgo(`${months}m${months > 1 ? "" : ""}`);
       } else {
         const years = Math.floor(timeDifference / year);
-        setTimeAgo(`${years} year${years > 1 ? "s" : ""} ago`);
+        setTimeAgo(`${years}y${years > 1 ? "" : ""}`);
       }
     };
 
