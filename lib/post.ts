@@ -5,7 +5,49 @@ export const getPostById = async (id: string) => {
     const post = await db.post.findUnique({ where: { id } });
 
     return post;
-  } catch (error) {
+  } catch {
+    return null;
+  }
+};
+
+export const getAllposts = async () => {
+  try {
+    const posts = await db.post.findMany({
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            email: true,
+            emailVerified: true,
+            image: true,
+            role: true,
+          },
+        },
+        likes: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                username: true,
+                email: true,
+                emailVerified: true,
+                image: true,
+                role: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return posts;
+  } catch {
     return null;
   }
 };
