@@ -4,13 +4,14 @@ import { UserAvatar } from "@/components/user-avatar";
 
 import { cn } from "@/lib/utils";
 
-import { LikeWithUser } from "@/types";
+import { CommentWithUser, LikeWithUser } from "@/types";
 
 type PostInfoProps = {
   likes: LikeWithUser[];
+  comments: CommentWithUser[];
 };
 
-export const PostInfo = ({ likes }: PostInfoProps) => {
+export const PostInfo = ({ likes, comments }: PostInfoProps) => {
   return (
     <div className="mt-1.5 flex w-full items-center">
       <div
@@ -60,17 +61,21 @@ export const PostInfo = ({ likes }: PostInfoProps) => {
           />
         ) : null}
       </div>
-      {likes && likes.length ? (
-        <>
-          <span className="text-[15px] font-light text-okei-secondary transition">
-            180 replies
-          </span>
-          <Dot className="mx-0.5 h-3 w-3 text-okei-secondary" />
-          <span className="text-[15px] font-light text-okei-secondary transition">
-            {likes.length} likes
-          </span>
-        </>
-      ) : null}
+      {!!comments && !!comments.length && (
+        <span className="text-[15px] font-light text-okei-secondary transition">
+          {comments.length} {comments.length > 1 ? "replies" : "reply"}
+        </span>
+      )}
+
+      {!!likes && !!likes.length && !!comments && !!comments.length && (
+        <Dot className="mx-0.5 h-3 w-3 text-okei-secondary" />
+      )}
+
+      {!!likes && !!likes.length && (
+        <span className="text-[15px] font-light text-okei-secondary transition">
+          {likes.length} {likes.length > 1 ? "likes" : "like"}
+        </span>
+      )}
     </div>
   );
 };

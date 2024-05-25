@@ -40,6 +40,21 @@ export const getAllposts = async () => {
             },
           },
         },
+        comments: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                username: true,
+                email: true,
+                emailVerified: true,
+                image: true,
+                role: true,
+              },
+            },
+          },
+        },
       },
       orderBy: {
         createdAt: "desc",

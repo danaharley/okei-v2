@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 
-type SubmitFormProps = {
+type FormSubmitProps = {
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
@@ -19,12 +19,12 @@ type SubmitFormProps = {
     | "link";
 };
 
-export const SubmitForm = ({
+export const FormSubmit = ({
   children,
   className,
   disabled,
   variant,
-}: SubmitFormProps) => {
+}: FormSubmitProps) => {
   const { pending } = useFormStatus();
 
   return (

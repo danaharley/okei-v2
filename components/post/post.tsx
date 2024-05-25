@@ -4,11 +4,11 @@ import { Separator } from "@/components/ui/separator";
 import { PostContainer } from "@/components/post/post-container";
 import { PostInfo } from "@/components/post/post-info";
 
-import { PostWithUserWithLikeWithUser, UserSession } from "@/types";
+import { PostWithUserWithLikeWithComment, UserSession } from "@/types";
 
 type PostProps = {
-  user: UserSession["user"];
-  posts: PostWithUserWithLikeWithUser[];
+  user: UserSession;
+  posts: PostWithUserWithLikeWithComment[];
 };
 
 export const Post = ({ user, posts }: PostProps) => {
@@ -18,7 +18,7 @@ export const Post = ({ user, posts }: PostProps) => {
         <React.Fragment key={post.id}>
           <div className="m-3 flex flex-col md:mx-0 md:my-3">
             <PostContainer user={user} post={post} />
-            <PostInfo likes={post.likes} />
+            <PostInfo likes={post.likes} comments={post.comments} />
           </div>
           <Separator />
         </React.Fragment>

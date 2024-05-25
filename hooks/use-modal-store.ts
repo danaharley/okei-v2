@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-import { PostWithUserWithLikeWithUser, UserSession } from "@/types";
+import { PostWithUserWithLike, UserSession } from "@/types";
 
 type ModalType = "createPost" | "commentPost";
 
 type ModalData = {
-  post?: PostWithUserWithLikeWithUser;
-  user?: UserSession["user"];
+  post?: PostWithUserWithLike;
+  user?: UserSession;
 };
 
 type ModalStore = {

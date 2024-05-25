@@ -14,8 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SubmitForm } from "@/components/form/submit-form";
-// import { FormInput } from "@/components/form/form-input";
+import { FormSubmit } from "@/components/form/form-submit";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "@/hooks/use-action";
@@ -87,12 +86,6 @@ export const FormRegister = () => {
                   disabled={isLoading}
                   {...field}
                 />
-                {/* <FormInput
-                  id="name"
-                  placeholder="Name"
-                  fieldErrors={fieldErrors}
-                  {...field}
-                /> */}
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -111,12 +104,6 @@ export const FormRegister = () => {
                   disabled={isLoading}
                   {...field}
                 />
-                {/* <FormInput
-                  id="email"
-                  placeholder="Email"
-                  fieldErrors={fieldErrors}
-                  {...field}
-                /> */}
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -135,12 +122,6 @@ export const FormRegister = () => {
                   disabled={isLoading}
                   {...field}
                 />
-                {/* <FormInput
-                  id="username"
-                  placeholder="Username"
-                  fieldErrors={fieldErrors}
-                  {...field}
-                /> */}
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -159,24 +140,17 @@ export const FormRegister = () => {
                   disabled={isLoading}
                   {...field}
                 />
-                {/* <FormInput
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  fieldErrors={fieldErrors}
-                  {...field}
-                /> */}
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <SubmitForm
+        <FormSubmit
           className="h-full w-full rounded-xl p-4"
           disabled={isLoading}
         >
           Sign up
-        </SubmitForm>
+        </FormSubmit>
       </form>
     </Form>
   );

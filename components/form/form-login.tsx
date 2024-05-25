@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SubmitForm } from "@/components/form/submit-form";
+import { FormSubmit } from "@/components/form/form-submit";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "@/hooks/use-action";
@@ -99,12 +99,12 @@ export const FormLogin = () => {
             </FormItem>
           )}
         />
-        <SubmitForm
+        <FormSubmit
           disabled={isLoading}
           className="h-full w-full rounded-xl p-4"
         >
           Log in
-        </SubmitForm>
+        </FormSubmit>
       </form>
     </Form>
   );

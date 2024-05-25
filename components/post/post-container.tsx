@@ -17,11 +17,11 @@ import { likePost } from "@/actions/post/like";
 
 import { cn } from "@/lib/utils";
 
-import { PostWithUserWithLikeWithUser, UserSession } from "@/types";
+import { PostWithUserWithLike, UserSession } from "@/types";
 
 type PostContainerProps = {
-  user: UserSession["user"];
-  post: PostWithUserWithLikeWithUser;
+  user: UserSession;
+  post: PostWithUserWithLike;
 };
 
 export const PostContainer = ({ user, post }: PostContainerProps) => {

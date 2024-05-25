@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Editor } from "@/components/tiptap/editor";
-import { SubmitForm } from "@/components/form/submit-form";
+import { FormSubmit } from "@/components/form/form-submit";
 import { UserAvatar } from "@/components/user-avatar";
 import { Separator } from "@/components/ui/separator";
 import { AlertModal } from "@/components/modals/alert-modal";
@@ -119,12 +119,12 @@ export const CreatePostModal = () => {
             />
           </div>
           <div className="fixed bottom-0 flex h-20 w-full items-center rounded-bl-2xl rounded-br-2xl bg-background">
-            <SubmitForm
+            <FormSubmit
               disabled={disabled}
               className="ml-auto mr-6 rounded-3xl text-[15px]"
             >
               {isLoading ? "Publishing" : "Publish"}
-            </SubmitForm>
+            </FormSubmit>
           </div>
         </form>
       </Form>
