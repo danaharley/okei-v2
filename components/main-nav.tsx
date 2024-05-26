@@ -20,7 +20,7 @@ export const MainVav = ({ routes, className }: MainVavProps) => {
             <Link
               key={index}
               href={route.href}
-              className="m-0.5 flex w-full items-center justify-center rounded-lg py-5 hover:bg-okei-foreground"
+              className="m-0.5 flex w-full items-center justify-center rounded-lg py-5 hover:bg-okei-foreground/80"
             >
               <span className="sr-only">{route.label}</span>
               {route.icon}

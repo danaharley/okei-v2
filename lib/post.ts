@@ -2,7 +2,57 @@ import { db } from "@/lib/db";
 
 export const getPostById = async (id: string) => {
   try {
-    const post = await db.post.findUnique({ where: { id } });
+    const post = await db.post.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            email: true,
+            emailVerified: true,
+            image: true,
+            role: true,
+          },
+        },
+        likes: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                username: true,
+                email: true,
+                emailVerified: true,
+                image: true,
+                role: true,
+              },
+            },
+          },
+        },
+        comments: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                username: true,
+                email: true,
+                emailVerified: true,
+                image: true,
+                role: true,
+              },
+            },
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+      },
+    });
 
     return post;
   } catch {
@@ -10,7 +60,7 @@ export const getPostById = async (id: string) => {
   }
 };
 
-export const getAllposts = async () => {
+export const getAllPosts = async () => {
   try {
     const posts = await db.post.findMany({
       include: {
@@ -63,6 +113,6 @@ export const getAllposts = async () => {
 
     return posts;
   } catch {
-    return null;
+    return;
   }
 };

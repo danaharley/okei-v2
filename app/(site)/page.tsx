@@ -1,17 +1,18 @@
 import { Post } from "@/components/post/post";
 import { PostInput } from "@/components/post/post-input";
 import { Tab } from "@/components/tab";
+import { Button } from "@/components/ui/button";
 
 import { currentUser } from "@/lib/auth";
-import { getAllposts } from "@/lib/post";
+import { getAllPosts } from "@/lib/post";
 
 const SitePage = async () => {
   const user = await currentUser();
 
-  const posts = await getAllposts();
+  const posts = await getAllPosts();
 
   return (
-    <div className="mx-auto max-w-[620px] pb-20 pt-[60px] md:pb-0 md:pt-[74px]">
+    <>
       <PostInput />
       <Tab />
       {posts && posts.length ? (
@@ -21,7 +22,7 @@ const SitePage = async () => {
           <p className="font-semibold">No Posts.</p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

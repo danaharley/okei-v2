@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
 import { PostContainer } from "@/components/post/post-container";
@@ -16,11 +17,13 @@ export const Post = ({ user, posts }: PostProps) => {
     <>
       {posts.map((post) => (
         <React.Fragment key={post.id}>
-          <div className="m-3 flex flex-col md:mx-0 md:my-3">
-            <PostContainer user={user} post={post} />
-            <PostInfo likes={post.likes} comments={post.comments} />
-          </div>
-          <Separator />
+          <Link href={`/${user.username}/post/${post.id}`}>
+            <div className="m-3 flex flex-col md:mx-0 md:my-3">
+              <PostContainer user={user} post={post} />
+              <PostInfo likes={post.likes} comments={post.comments} />
+            </div>
+          </Link>
+          <Separator className="bg-okei-secondary/30" />
         </React.Fragment>
       ))}
     </>

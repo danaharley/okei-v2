@@ -30,7 +30,7 @@ export const AlertModal = ({
             {title}
           </AlertDialogTitle>
         </AlertDialogHeader>
-        <Separator />
+        <Separator className="bg-okei-secondary/30" />
         <div className="flex items-center hover:cursor-pointer">
           <div
             className="flex h-14 w-full items-center justify-center px-8 hover:bg-okei-secondary/10"
@@ -38,7 +38,7 @@ export const AlertModal = ({
           >
             Cancel
           </div>
-          <Separator orientation="vertical" />
+          <Separator orientation="vertical" className="bg-okei-secondary/30" />
           <div
             className="flex h-14 w-full items-center justify-center px-8 font-semibold text-destructive hover:bg-okei-secondary/10"
             onClick={onConfirm}

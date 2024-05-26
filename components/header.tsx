@@ -127,7 +127,7 @@ export const Header = () => {
         <MainVav routes={routes} className="hidden md:block" />
         <ActionMenu
           align="end"
-          alignOffset={8}
+          alignOffset={0}
           icon={Menu}
           className="place-self-end self-center p-4 hover:cursor-pointer"
           iconStyle="group-hover:text-okei-primary h-5 w-5 text-sm"

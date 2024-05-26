@@ -16,10 +16,10 @@ import { useModalStore } from "@/hooks/use-modal-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "@/hooks/use-action";
 
-import { CommentPostSchema } from "@/actions/post/comment/schema";
-import { commentPost } from "@/actions/post/comment";
+import { CreateCommentSchema } from "@/actions/comment/create/schema";
+import { commentPost } from "@/actions/comment/create";
 
-type FormSchemaType = z.output<typeof CommentPostSchema>;
+type FormSchemaType = z.output<typeof CreateCommentSchema>;
 
 export const CommentPostModal = () => {
   const [alertModal, setAlertModal] = React.useState(false);
@@ -31,7 +31,7 @@ export const CommentPostModal = () => {
   const isModalOpen = isOpen && type === "commentPost";
 
   const form = useForm<FormSchemaType>({
-    resolver: zodResolver(CommentPostSchema),
+    resolver: zodResolver(CreateCommentSchema),
     defaultValues: {
       postId: "",
       content: "",

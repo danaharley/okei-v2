@@ -39,23 +39,29 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
     return lists.includes(user.id!);
   }, [post.likes, user.id]);
 
-  const { execute: executeDelete } = useAction(deletePost, {
-    onSuccess: () => {
-      toast.success("Post deleted.");
+  const { execute: executeDelete, isLoading: isloadingDelete } = useAction(
+    deletePost,
+    {
+      onSuccess: () => {
+        toast.success("Post deleted.");
+      },
+      onError: (error) => {
+        toast.error(error);
+      },
     },
-    onError: (error) => {
-      toast.error(error);
-    },
-  });
+  );
 
-  const { execute: executeLike } = useAction(likePost, {
-    onSuccess: () => {
-      hasLiked ? toast.success("Unliked.") : toast.success("Liked.");
+  const { execute: executeLike, isLoading: isloadingLike } = useAction(
+    likePost,
+    {
+      onSuccess: () => {
+        hasLiked ? toast.success("Unliked.") : toast.success("Liked.");
+      },
+      onError: (error) => {
+        toast.error(error);
+      },
     },
-    onError: (error) => {
-      toast.error(error);
-    },
-  });
+  );
 
   const onDelete = (id: string) => {
     executeDelete({ id });
@@ -75,7 +81,7 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
     >
       <ActionMenu
         align="end"
-        alignOffset={8}
+        alignOffset={0}
         icon={Ellipsis}
         className="absolute -top-0.5 right-0 ml-auto"
       >
@@ -85,6 +91,7 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
           className="h-full w-full justify-start border-none p-1.5 text-destructive hover:text-destructive"
           iconStyle="mr-2 h-4 w-4 text-destructive"
           onClick={() => onDelete(post.id)}
+          disabled={isloadingDelete}
         />
       </ActionMenu>
       <div className="-mb-1.5 flex items-center">
@@ -97,6 +104,7 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
             "h-6 w-6 fill-transparent stroke-okei-primary/85 stroke",
             hasLiked && "fill-okei-like stroke-okei-like",
           )}
+          disabled={isloadingLike}
         />
         <ButtonIcon
           size="icon"
