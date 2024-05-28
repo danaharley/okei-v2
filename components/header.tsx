@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -16,12 +16,16 @@ import { cn } from "@/lib/utils";
 
 import { logout } from "@/actions/logout";
 
+import { useCurrentUser } from "@/hooks/use-current-user";
+
 export const Header = () => {
   const pathname = usePathname();
 
+  const user = useCurrentUser();
+
   const { setTheme, theme } = useTheme();
 
-  const routes = useMemo(
+  const routes = React.useMemo(
     () => [
       {
         label: "Home",
@@ -49,19 +53,6 @@ export const Header = () => {
           />
         ),
       },
-      // {
-      //   label: "Search",
-      //   href: "/search",
-      //   active: pathname === "/search",
-      //   icon: (
-      //     <Icons.search
-      //       className={cn(
-      //         "size-[26px] fill-[#b8b8b8] stroke-okei-header_icon dark:fill-okei-header_icon",
-      //         pathname === "/search" && "fill-okei-primary stroke-okei-primary",
-      //       )}
-      //     />
-      //   ),
-      // },
       {
         label: "Create",
         href: "/create",
@@ -91,20 +82,20 @@ export const Header = () => {
       },
       {
         label: "Profile",
-        href: "/profile",
-        active: pathname === "/profile",
+        href: `/${user?.username}`,
+        active: pathname === `/${user?.username}`,
         icon: (
           <Icons.profile
             className={cn(
               "size-[26px] fill-transparent stroke-okei-header_icon",
-              pathname === "/profile" &&
+              pathname === `/${user?.username}` &&
                 "fill-okei-primary stroke-okei-primary",
             )}
           />
         ),
       },
     ],
-    [pathname],
+    [pathname, user?.username],
   );
 
   const onClick = () => {

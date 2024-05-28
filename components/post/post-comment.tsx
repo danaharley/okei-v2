@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Ellipsis, Trash } from "lucide-react";
 
@@ -19,6 +19,8 @@ type PostCommentProps = {
 };
 
 export const PostComment = ({ comments }: PostCommentProps) => {
+  const router = useRouter();
+
   const params = useParams<{ profile: string; postId: string }>();
 
   const { execute, isLoading } = useAction(deleteComment, {
@@ -53,6 +55,9 @@ export const PostComment = ({ comments }: PostCommentProps) => {
                       userImage={comment.user.image}
                       postContent={comment.content}
                       postDate={comment.createdAt}
+                      onNavigate={() =>
+                        router.push(`/${comment.user.username}`)
+                      }
                     />
                     <ActionMenu
                       align="end"

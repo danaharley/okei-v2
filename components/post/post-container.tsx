@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { Ellipsis, Trash } from "lucide-react";
 import { toast } from "sonner";
 
@@ -25,6 +26,8 @@ type PostContainerProps = {
 };
 
 export const PostContainer = ({ user, post }: PostContainerProps) => {
+  const router = useRouter();
+
   const { onOpen } = useModalStore();
 
   const hasLiked = React.useMemo(() => {
@@ -78,6 +81,10 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
       postDate={post.createdAt}
       postContent={post.content}
       showSeparator={!!post.likes.length}
+      onNavigate={(e) => {
+        e.preventDefault();
+        router.push(`/${post.user.username}`);
+      }}
     >
       <ActionMenu
         align="end"
@@ -96,12 +103,15 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
       </ActionMenu>
       <div className="-mb-1.5 flex items-center">
         <ButtonIcon
-          onClick={() => onLike(post.id)}
+          onClick={(e) => {
+            e.preventDefault();
+            onLike(post.id);
+          }}
           size="icon"
           className="rounded-full border-none focus-visible:ring-0 focus-visible:ring-offset-0"
           icon={Icons.love}
           iconStyle={cn(
-            "h-6 w-6 fill-transparent stroke-okei-primary/85 stroke",
+            "h-[21px] w-[21px] fill-transparent stroke-okei-primary/85 stroke",
             hasLiked && "fill-okei-like stroke-okei-like",
           )}
           disabled={isloadingLike}
@@ -111,9 +121,12 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
           className="rounded-full border-none focus-visible:ring-0 focus-visible:ring-offset-0"
           icon={Icons.reply}
           iconStyle={cn(
-            "h-[22px] w-[22px] fill-transparent stroke-okei-primary/85",
+            "h-[19px] w-[19px] fill-transparent stroke-okei-primary/85",
           )}
-          onClick={() => onOpen("commentPost", { post, user })}
+          onClick={(e) => {
+            e.preventDefault();
+            onOpen("commentPost", { post, user });
+          }}
         />
       </div>
     </PostContent>

@@ -62,7 +62,7 @@ export const PostInfo = ({ likes, comments }: PostInfoProps) => {
         ) : null}
       </div>
       {!!comments && !!comments.length && (
-        <span className="text-[15px] font-light text-okei-secondary transition">
+        <span className="text-[13px] font-normal text-okei-secondary transition">
           {comments.length} {comments.length > 1 ? "replies" : "reply"}
         </span>
       )}
@@ -72,7 +72,7 @@ export const PostInfo = ({ likes, comments }: PostInfoProps) => {
       )}
 
       {!!likes && !!likes.length && (
-        <span className="text-[15px] font-light text-okei-secondary transition">
+        <span className="text-[13px] font-normal text-okei-secondary transition">
           {likes.length} {likes.length > 1 ? "likes" : "like"}
         </span>
       )}

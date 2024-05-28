@@ -33,3 +33,13 @@ export const getUserByUserId = async (id: string): Promise<User | null> => {
     return null;
   }
 };
+
+export const getAllUsers = async (): Promise<User[] | null> => {
+  try {
+    const users = await db.user.findMany();
+
+    return users;
+  } catch {
+    return null;
+  }
+};

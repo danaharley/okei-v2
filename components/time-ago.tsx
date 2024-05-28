@@ -54,7 +54,7 @@ export const TimeAgo = ({ timestamp, className }: TimeAgoProps) => {
   return (
     <span
       className={cn(
-        "shrink-0 text-sm font-normal leading-none text-muted-foreground/75",
+        "shrink-0 text-sm font-normal leading-none tracking-tighter text-muted-foreground/75",
         className,
       )}
     >

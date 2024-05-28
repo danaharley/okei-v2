@@ -10,6 +10,7 @@ type PostContentProps = {
   postDate?: Date;
   postContent?: string;
   showSeparator?: boolean;
+  onNavigate?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   children?: React.ReactNode;
 };
 
@@ -19,6 +20,7 @@ export const PostContent = ({
   postDate,
   postContent,
   showSeparator,
+  onNavigate,
   children,
 }: PostContentProps) => {
   return (
@@ -44,11 +46,16 @@ export const PostContent = ({
       </div>
       <div className="w-full">
         <div className="relative flex items-center">
-          <p className="ml-2 font-medium text-okei-primary">{username}</p>
+          <div
+            className="ml-2 text-[15px] font-medium text-okei-primary hover:cursor-pointer hover:underline"
+            onClick={onNavigate}
+          >
+            {username}
+          </div>
           {postDate && (
             <TimeAgo
               timestamp={postDate}
-              className="ml-1 text-base text-okei-secondary"
+              className="ml-1 text-okei-secondary"
             />
           )}
         </div>

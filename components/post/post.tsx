@@ -18,7 +18,7 @@ export const Post = ({ user, posts }: PostProps) => {
       {posts.map((post) => (
         <React.Fragment key={post.id}>
           <Link href={`/${user.username}/post/${post.id}`}>
-            <div className="m-3 flex flex-col md:mx-0 md:my-3">
+            <div className="mx-3 mb-1.5 mt-3 flex flex-col md:mx-0">
               <PostContainer user={user} post={post} />
               <PostInfo likes={post.likes} comments={post.comments} />
             </div>
