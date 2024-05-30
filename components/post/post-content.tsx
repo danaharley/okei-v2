@@ -4,6 +4,8 @@ import { TimeAgo } from "@/components/time-ago";
 import { Separator } from "@/components/ui/separator";
 import { UserAvatar } from "@/components/user-avatar";
 
+import { siteConfig } from "@/config/site";
+
 type PostContentProps = {
   userImage: string | null;
   username: string | null;
@@ -28,12 +30,8 @@ export const PostContent = ({
       <div className="relative flex flex-col items-center">
         <div className="z-10 bg-background pb-2">
           <UserAvatar
-            src={
-              userImage
-                ? userImage
-                : "https://res.cloudinary.com/nubicoder/image/upload/q_auto,f_auto,w_500,h_500,c_thumb,g_faces,z_0.75/v1692813203/danaharley/dana-harli.jpg"
-            }
-            alt={username || "profile"}
+            src={userImage ? userImage : siteConfig.image.url}
+            alt={username ? username : "profile"}
             className="mr-0"
           />
         </div>

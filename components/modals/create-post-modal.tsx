@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,12 +26,19 @@ import { useAction } from "@/hooks/use-action";
 import { createPost } from "@/actions/post/create";
 import { CreatePostSchema } from "@/actions/post/create/schema";
 
+import { siteConfig } from "@/config/site";
+
 type FormSchemaType = z.output<typeof CreatePostSchema>;
 
 export const CreatePostModal = () => {
   const [alertModal, setAlertModal] = React.useState(false);
 
-  const { isOpen, type, onClose } = useModalStore();
+  const {
+    isOpen,
+    type,
+    onClose,
+    data: { user },
+  } = useModalStore();
 
   const isModalOpen = isOpen && type === "createPost";
 
@@ -94,8 +103,8 @@ export const CreatePostModal = () => {
         >
           <div className="mx-6 flex h-14 shrink-0 items-center md:mt-6 md:h-16">
             <UserAvatar
-              src="https://res.cloudinary.com/nubicoder/image/upload/q_auto,f_auto,w_500,h_500,c_thumb,g_faces,z_0.75/v1692813203/danaharley/dana-harli.jpg"
-              alt="profile"
+              src={user?.image ? user.image : siteConfig.image.url}
+              alt={user?.username ? user.username : "profile"}
             />
             <p className="font-medium text-okei-primary">danaharliansyah</p>
           </div>

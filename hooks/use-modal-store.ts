@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import { PostWithUserWithLike, UserSession } from "@/types";
 
-type ModalType = "createPost" | "commentPost";
+type ModalType = "createPost" | "commentPost" | "editProfile";
 
 type ModalData = {
   post?: PostWithUserWithLike;

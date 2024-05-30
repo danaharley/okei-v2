@@ -23,6 +23,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.username = token.username;
       }
 
+      if (token.name && session.user) {
+        session.user.name = token.name;
+      }
+
+      if (token.email && session.user) {
+        session.user.email = token.email;
+      }
+
+      if (token.image && session.user) {
+        session.user.image = token.image;
+      }
+
       return session;
     },
     async jwt({ token }) {
@@ -32,8 +44,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       if (!existingUser) return token;
 
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.username = existingUser.username;
       token.role = existingUser.role;
       token.username = existingUser.username;
+      token.image = existingUser.image;
 
       return token;
     },

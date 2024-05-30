@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 
 import { CommentWithUser, LikeWithUser } from "@/types";
 
+import { siteConfig } from "@/config/site";
+
 type PostInfoProps = {
   likes: LikeWithUser[];
   comments: CommentWithUser[];
@@ -25,7 +27,7 @@ export const PostInfo = ({ likes, comments }: PostInfoProps) => {
             src={
               likes[0]?.user?.image
                 ? likes[0]?.user?.image
-                : "https://res.cloudinary.com/nubicoder/image/upload/q_auto,f_auto,w_500,h_500,c_thumb,g_faces,z_0.75/v1692813203/danaharley/dana-harli.jpg"
+                : siteConfig.image.url
             }
             alt="profile"
             className={cn(
@@ -39,7 +41,7 @@ export const PostInfo = ({ likes, comments }: PostInfoProps) => {
             src={
               likes[1]?.user?.image
                 ? likes[1]?.user?.image
-                : "https://res.cloudinary.com/nubicoder/image/upload/q_auto,f_auto,w_500,h_500,c_thumb,g_faces,z_0.75/v1692813203/danaharley/dana-harli.jpg"
+                : siteConfig.image.url
             }
             alt="profile"
             className={cn(
@@ -54,7 +56,7 @@ export const PostInfo = ({ likes, comments }: PostInfoProps) => {
             src={
               likes[2]?.user?.image
                 ? likes[2]?.user?.image
-                : "https://res.cloudinary.com/nubicoder/image/upload/q_auto,f_auto,w_500,h_500,c_thumb,g_faces,z_0.75/v1692813203/danaharley/dana-harli.jpg"
+                : siteConfig.image.url
             }
             alt="profile"
             className="mr-0 h-3 w-3"

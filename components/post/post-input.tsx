@@ -4,18 +4,23 @@ import { Button } from "@/components/ui/button";
 import { UserAvatar } from "@/components/user-avatar";
 
 import { useModalStore } from "@/hooks/use-modal-store";
+import { useCurrentUser } from "@/hooks/use-current-user";
+
+import { siteConfig } from "@/config/site";
 
 export const PostInput = () => {
   const { onOpen } = useModalStore();
 
+  const user = useCurrentUser();
+
   return (
     <div
       className="hidden items-center border-b border-b-okei-secondary/30 py-4 md:flex"
-      onClick={() => onOpen("createPost")}
+      onClick={() => onOpen("createPost", { user })}
     >
       <UserAvatar
-        src="https://res.cloudinary.com/nubicoder/image/upload/q_auto,f_auto,w_500,h_500,c_thumb,g_faces,z_0.75/v1692813203/danaharley/dana-harli.jpg"
-        alt="profile"
+        src={user?.image ? user.image : siteConfig.image.url}
+        alt={user?.username ? user.username : "profile"}
       />
       <p className="text-sm font-light text-okei-secondary">
         Start a thread...
