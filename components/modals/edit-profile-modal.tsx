@@ -70,7 +70,6 @@ export const EditProfileModal = () => {
   };
 
   const onSubmit: SubmitHandler<FormSchemaType> = (e) => {
-    console.log(e);
     execute({
       name: e.name,
       email: e.email,
@@ -123,7 +122,7 @@ export const EditProfileModal = () => {
                   <FormItem className="group relative space-y-0">
                     <FormControl>
                       <UserAvatar
-                        src={field.value}
+                        src={field.value ? field.value : siteConfig.image.url}
                         alt="profile"
                         className="mr-0 h-14 w-14"
                         disabled={isLoading}

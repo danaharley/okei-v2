@@ -97,7 +97,10 @@ export const PostContainer = ({ user, post }: PostContainerProps) => {
           title="Delete"
           className="h-full w-full justify-start border-none p-1.5 text-destructive hover:text-destructive"
           iconStyle="mr-2 h-4 w-4 text-destructive"
-          onClick={() => onDelete(post.id)}
+          onClick={(e) => {
+            e.preventDefault();
+            onDelete(post.id);
+          }}
           disabled={isloadingDelete}
         />
       </ActionMenu>

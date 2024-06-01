@@ -16,12 +16,14 @@ import { cn } from "@/lib/utils";
 
 import { logout } from "@/actions/logout";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { UserSession } from "@/types";
 
-export const Header = () => {
+type HeaderProps = {
+  user: UserSession;
+};
+
+export const Header = ({ user }: HeaderProps) => {
   const pathname = usePathname();
-
-  const user = useCurrentUser();
 
   const { setTheme, theme } = useTheme();
 
@@ -82,8 +84,8 @@ export const Header = () => {
       },
       {
         label: "Profile",
-        href: `/${user?.username}`,
-        active: pathname === `/${user?.username}`,
+        href: `/${user.username}`,
+        active: pathname === `/${user.username}`,
         icon: (
           <Icons.profile
             className={cn(
@@ -95,7 +97,7 @@ export const Header = () => {
         ),
       },
     ],
-    [pathname, user?.username],
+    [pathname, user.username],
   );
 
   const onClick = () => {

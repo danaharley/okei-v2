@@ -9,9 +9,9 @@ import { getAllPosts, getPostById } from "@/lib/post";
 import { currentUser } from "@/lib/auth";
 
 export const generateStaticParams = async () => {
-  const posts = await getAllPosts();
+  const posts = (await getAllPosts()) || [];
 
-  if (!posts) return;
+  if (!posts) return [];
 
   return posts.map((post) => ({
     postId: post.id,

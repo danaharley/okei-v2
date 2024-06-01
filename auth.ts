@@ -31,7 +31,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.email = token.email;
       }
 
-      if (token.image && session.user) {
+      if (!token.image || (token.image && session.user)) {
         session.user.image = token.image;
       }
 
@@ -54,6 +54,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return token;
     },
   },
+  trustHost: true,
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
   ...authConfig,

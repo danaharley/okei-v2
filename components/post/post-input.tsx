@@ -4,14 +4,16 @@ import { Button } from "@/components/ui/button";
 import { UserAvatar } from "@/components/user-avatar";
 
 import { useModalStore } from "@/hooks/use-modal-store";
-import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { siteConfig } from "@/config/site";
+import { UserSession } from "@/types";
 
-export const PostInput = () => {
+type PostInputProps = {
+  user: UserSession;
+};
+
+export const PostInput = ({ user }: PostInputProps) => {
   const { onOpen } = useModalStore();
-
-  const user = useCurrentUser();
 
   return (
     <div
@@ -19,8 +21,8 @@ export const PostInput = () => {
       onClick={() => onOpen("createPost", { user })}
     >
       <UserAvatar
-        src={user?.image ? user.image : siteConfig.image.url}
-        alt={user?.username ? user.username : "profile"}
+        src={user.image ? user.image : siteConfig.image.url}
+        alt={user.username ? user.username : "profile"}
       />
       <p className="text-sm font-light text-okei-secondary">
         Start a thread...
