@@ -35,6 +35,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.image = token.image;
       }
 
+      if (token.hasActivity && session.user) {
+        session.user.hasActivity = token.hasActivity;
+      }
+
       return session;
     },
     async jwt({ token }) {
@@ -50,6 +54,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       token.role = existingUser.role;
       token.username = existingUser.username;
       token.image = existingUser.image;
+      token.hasActivity = existingUser.hasActivity;
 
       return token;
     },

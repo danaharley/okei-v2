@@ -72,6 +72,7 @@ export const Header = ({ user }: HeaderProps) => {
         label: "Notifications",
         href: "/activity",
         active: pathname === "/activity",
+        hasActivity: user.hasActivity,
         icon: (
           <Icons.love
             className={cn(
@@ -97,7 +98,7 @@ export const Header = ({ user }: HeaderProps) => {
         ),
       },
     ],
-    [pathname, user.username],
+    [pathname, user.username, user.hasActivity],
   );
 
   const onClick = () => {

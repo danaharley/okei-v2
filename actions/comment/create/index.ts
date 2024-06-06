@@ -37,6 +37,24 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         postId: existingPost.id,
       },
     });
+
+    await db.activity.create({
+      data: {
+        type: "COMMENT",
+        content: "Commented on your post",
+        userId: user.id,
+        postId: existingPost.id,
+      },
+    });
+
+    await db.user.update({
+      where: {
+        id: existingPost.userId,
+      },
+      data: {
+        hasActivity: true,
+      },
+    });
   } catch (error) {
     console.log({ error });
 

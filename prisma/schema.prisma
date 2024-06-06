@@ -27,23 +27,29 @@ model User {
   image         String?
   password      String?
   role          UserRole  @default(USER)
+  hasActivity   Boolean?  @default(false)
 
-  posts    Post[]
-  likes    Like[]
-  comments Comment[]
+  posts      Post[]
+  likes      Like[]
+  comments   Comment[]
+  followers  Follow[]   @relation("follower")
+  followings Follow[]   @relation("following")
+  activities Activity[]
 
   @@map("users")
 }
 
 model Post {
-  id        String    @id @default(cuid())
-  content   String    @db.Text
-  userId    String
-  likes     Like[]
-  comments  Comment[]
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id      String @id @default(cuid())
+  content String @db.Text
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  likes      Like[]
+  comments   Comment[]
+  activities Activity[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 }
 
 model Like {
@@ -63,6 +69,32 @@ model Comment {
   postId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Follow {
+  id          String @id @default(cuid())
+  followerId  String
+  followingId String
+
+  follower  User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([followerId, followingId])
+  @@map("follows")
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  type      String
+  userId    String
+  postId    String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

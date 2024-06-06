@@ -22,7 +22,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   const user = await currentUser();
 
-  if (!user) {
+  if (!user || !user.id) {
     return {
       error: "Unauthenticated.",
     };
@@ -55,8 +55,26 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     } else {
       updateLiked = await db.like.create({
         data: {
-          postId: existingPost.id!,
-          userId: user.id!,
+          postId: existingPost.id,
+          userId: user.id,
+        },
+      });
+
+      await db.activity.create({
+        data: {
+          type: "LIKE",
+          content: "Liked your post",
+          userId: user.id,
+          postId: existingPost.id,
+        },
+      });
+
+      await db.user.update({
+        where: {
+          id: existingPost.userId,
+        },
+        data: {
+          hasActivity: true,
         },
       });
     }

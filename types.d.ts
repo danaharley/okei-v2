@@ -1,6 +1,14 @@
 import { Session, type DefaultSession } from "next-auth";
 import { JWT } from "next-auth/jwt";
-import { Comment, Like, Post, User, UserRole } from "@prisma/client";
+import {
+  Activity,
+  Comment,
+  Follow,
+  Like,
+  Post,
+  User,
+  UserRole,
+} from "@prisma/client";
 
 declare module "next-auth" {
   /**
@@ -10,6 +18,7 @@ declare module "next-auth" {
     user: {
       role: UserRole;
       username: string | null;
+      hasActivity: boolean | null;
     } & DefaultSession["user"];
   }
 }
@@ -20,12 +29,17 @@ declare module "next-auth/jwt" {
     role: UserRole;
     username: string | null;
     image: string | null;
+    hasActivity: boolean | null;
   }
 }
 
 export type UserSession = Session["user"];
 
 export type UserWithoutPassword = Omit<User, "password">;
+
+export type UserWithFollow = UserWithoutPassword & { followers: Follow[] } & {
+  followings: Follow[];
+};
 
 export type PostWithUser = Post & { user: UserWithoutPassword };
 
@@ -46,3 +60,5 @@ export type PostWithUserWithLikeWithComment = Post & {
 } & {
   comments: CommentWithUser[];
 };
+
+export type ActivityWithUser = Activity & { user: UserWithoutPassword };

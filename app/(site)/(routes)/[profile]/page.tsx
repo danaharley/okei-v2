@@ -1,4 +1,5 @@
 import * as React from "react";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
@@ -22,30 +23,20 @@ export const generateStaticParams = async () => {
 
 const ProfilePage = async ({ params }: { params: { profile: string } }) => {
   const user = await currentUser();
-  const userParams = await getUserByUsername(params.profile);
+  const userByParam = await getUserByUsername(params.profile);
 
-  if (!user || !userParams) return;
+  if (!userByParam) {
+    return redirect("/");
+  }
 
   const posts = await getPostsByUsername(params.profile);
 
-  let heroProfile;
-
-  if (user.username === params.profile) {
-    heroProfile = (
-      <HeroProfile user={user} editable={user.username === params.profile} />
-    );
-  } else {
-    heroProfile = (
-      <HeroProfile
-        user={userParams}
-        editable={user.username === params.profile}
-      />
-    );
-  }
-
   return (
     <>
-      {heroProfile}
+      <HeroProfile
+        user={userByParam}
+        canEditProfile={user.username === params.profile}
+      />
       <Separator className="bg-okei-secondary/30" />
       {posts && posts.length ? (
         posts.map((post) => (

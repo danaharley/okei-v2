@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { Post } from "@prisma/client";
 
 export const getPostsByUserId = async (userId: string) => {
   try {
@@ -29,6 +28,7 @@ export const getPostById = async (id: string) => {
             username: true,
             email: true,
             emailVerified: true,
+            hasActivity: true,
             image: true,
             role: true,
           },
@@ -42,6 +42,7 @@ export const getPostById = async (id: string) => {
                 username: true,
                 email: true,
                 emailVerified: true,
+                hasActivity: true,
                 image: true,
                 role: true,
               },
@@ -57,6 +58,7 @@ export const getPostById = async (id: string) => {
                 username: true,
                 email: true,
                 emailVerified: true,
+                hasActivity: true,
                 image: true,
                 role: true,
               },
@@ -86,6 +88,7 @@ export const getAllPosts = async () => {
             username: true,
             email: true,
             emailVerified: true,
+            hasActivity: true,
             image: true,
             role: true,
           },
@@ -99,6 +102,7 @@ export const getAllPosts = async () => {
                 username: true,
                 email: true,
                 emailVerified: true,
+                hasActivity: true,
                 image: true,
                 role: true,
               },
@@ -114,6 +118,7 @@ export const getAllPosts = async () => {
                 username: true,
                 email: true,
                 emailVerified: true,
+                hasActivity: true,
                 image: true,
                 role: true,
               },
@@ -148,6 +153,7 @@ export const getPostsByUsername = async (username: string) => {
             username: true,
             email: true,
             emailVerified: true,
+            hasActivity: true,
             image: true,
             role: true,
           },
@@ -161,6 +167,7 @@ export const getPostsByUsername = async (username: string) => {
                 username: true,
                 email: true,
                 emailVerified: true,
+                hasActivity: true,
                 image: true,
                 role: true,
               },
@@ -176,6 +183,7 @@ export const getPostsByUsername = async (username: string) => {
                 username: true,
                 email: true,
                 emailVerified: true,
+                hasActivity: true,
                 image: true,
                 role: true,
               },

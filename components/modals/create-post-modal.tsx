@@ -106,7 +106,7 @@ export const CreatePostModal = () => {
               src={user?.image ? user.image : siteConfig.image.url}
               alt={user?.username ? user.username : "profile"}
             />
-            <p className="font-medium text-okei-primary">danaharliansyah</p>
+            <p className="font-medium text-okei-primary">{user?.username}</p>
           </div>
           <Separator className="bg-okei-secondary/30" />
           <div className="mx-6 my-6 mb-32 overflow-y-auto md:mb-20">

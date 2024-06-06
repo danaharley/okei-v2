@@ -2,6 +2,8 @@ import { User } from "@prisma/client";
 
 import { db } from "@/lib/db";
 
+import { UserWithFollow } from "@/types";
+
 export const getUserByEmail = async (email: string): Promise<User | null> => {
   try {
     const user = await db.user.findUnique({ where: { email } });
@@ -14,9 +16,17 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
 
 export const getUserByUsername = async (
   username: string,
-): Promise<User | null> => {
+): Promise<UserWithFollow | null> => {
   try {
-    const user = await db.user.findUnique({ where: { username } });
+    const user = await db.user.findUnique({
+      where: {
+        username,
+      },
+      include: {
+        followers: true,
+        followings: true,
+      },
+    });
 
     return user;
   } catch {
