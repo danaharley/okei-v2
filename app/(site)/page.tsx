@@ -1,6 +1,6 @@
 import { Post } from "@/components/post/post";
 import { PostInput } from "@/components/post/post-input";
-import { Tab } from "@/components/tab";
+// import { Tab } from "@/components/tab";
 
 import { currentUser } from "@/lib/auth";
 import { getAllPosts } from "@/lib/post";
@@ -13,7 +13,7 @@ const SitePage = async () => {
   return (
     <>
       <PostInput user={user} />
-      <Tab />
+      {/* <Tab /> */}
       {posts && posts.length ? (
         <Post user={user} posts={posts} />
       ) : (

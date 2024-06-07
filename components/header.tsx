@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { LogOut, Menu, Moon, Search, Settings, Sun } from "lucide-react";
+import { LogOut, Menu, Moon, Search, Sun } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import { Icons } from "@/components/icons";
@@ -133,12 +133,12 @@ export const Header = ({ user }: HeaderProps) => {
             iconStyle="mr-2"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           />
-          <ButtonIcon
+          {/* <ButtonIcon
             icon={Settings}
             title="Settings"
             className="h-full w-full justify-start border-none p-1.5"
             iconStyle="mr-2"
-          />
+          /> */}
           <ButtonIcon
             icon={LogOut}
             title="Logout"
