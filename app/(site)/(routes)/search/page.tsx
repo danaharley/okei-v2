@@ -1,10 +1,21 @@
-const SearchPage = () => {
-  return (
-    <div className="p-8 text-center">
-      <p className="text-2xl font-semibold text-okei-primary/80">COMING SOON</p>
-      <span className="text-xs text-okei-secondary">Under Construction</span>
-    </div>
-  );
+import UserList from "@/components/user-list";
+
+import { currentUser } from "@/lib/auth";
+import { db } from "@/lib/db";
+
+const SearchPage = async () => {
+  const currUser = await currentUser();
+
+  const users = await db.user.findMany({
+    include: {
+      followers: true,
+      followings: true,
+    },
+  });
+
+  const filteredUser = users && users.filter((user) => user.id !== currUser.id);
+
+  return <UserList users={filteredUser} />;
 };
 
 export default SearchPage;

@@ -10,9 +10,10 @@ type UserInfoContainerProps = {
   userImage: string;
   altimage: string;
   username: string;
-  type: string;
-  date: Date;
-  content: string;
+  // type?: string;
+  date?: Date;
+  content?: string;
+  followersCount?: number;
 };
 
 export const UserInfoContainer = ({
@@ -22,6 +23,7 @@ export const UserInfoContainer = ({
   date,
   // type,
   content,
+  followersCount,
 }: UserInfoContainerProps) => {
   return (
     <div className="my-3 flex flex-row items-start">
@@ -35,7 +37,7 @@ export const UserInfoContainer = ({
           <div className="text-[15px]">
             <div className="flex items-center space-x-1">
               <h1 className="font-semibold text-okei-primary">{username}</h1>
-              <TimeAgo timestamp={date} />
+              {date ? <TimeAgo timestamp={date} /> : null}
             </div>
             <p className="text-okei-secondary">{content}</p>
           </div>
@@ -52,9 +54,9 @@ export const UserInfoContainer = ({
             </Button>
           )} */}
         </div>
-        {/* {followersCount ? (
+        {followersCount ? (
           <p className="mt-1.5 text-okei-primary">{`${followersCount} followers`}</p>
-        ) : null} */}
+        ) : null}
         <Separator className="bg-okei-secondary/30" />
       </div>
     </div>
