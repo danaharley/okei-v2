@@ -11,18 +11,19 @@ import { getPostsByUsername } from "@/lib/post";
 import { currentUser } from "@/lib/auth";
 import { getAllUsers, getUserByUsername } from "@/lib/user";
 
-export const generateStaticParams = async () => {
-  const users = (await getAllUsers()) || [];
+// export const generateStaticParams = async () => {
+//   const users = (await getAllUsers()) || [];
 
-  if (!users) return [];
+//   if (!users) return [];
 
-  return users.map((user) => ({
-    profile: user.username,
-  }));
-};
+//   return users.map((user) => ({
+//     profile: user.username,
+//   }));
+// };
 
 const ProfilePage = async ({ params }: { params: { profile: string } }) => {
   const user = await currentUser();
+
   const userByParam = await getUserByUsername(params.profile);
 
   if (!userByParam) {

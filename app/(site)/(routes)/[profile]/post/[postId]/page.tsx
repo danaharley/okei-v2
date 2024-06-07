@@ -8,15 +8,15 @@ import { PostComment } from "@/components/post/post-comment";
 import { getAllPosts, getPostById } from "@/lib/post";
 import { currentUser } from "@/lib/auth";
 
-export const generateStaticParams = async () => {
-  const posts = (await getAllPosts()) || [];
+// export const generateStaticParams = async () => {
+//   const posts = (await getAllPosts()) || [];
 
-  if (!posts) return [];
+//   if (!posts) return [];
 
-  return posts.map((post) => ({
-    postId: post.id,
-  }));
-};
+//   return posts.map((post) => ({
+//     postId: post.id,
+//   }));
+// };
 
 const PostIdPage = async ({ params }: { params: { postId: string } }) => {
   const user = await currentUser();
