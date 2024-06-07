@@ -59,14 +59,16 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       await db.activity.create({
         data: {
           type: "FOLLOW",
+          performerId: followingId,
+          receiverId: followerId,
+          followId: updateFollow.id,
           content: "Followed you",
-          userId: user.id,
         },
       });
 
       await db.user.update({
         where: {
-          id: user.id,
+          id: followerId,
         },
         data: {
           hasActivity: true,

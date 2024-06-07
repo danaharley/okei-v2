@@ -4,7 +4,6 @@ import * as React from "react";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { TimeAgo } from "@/components/time-ago";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 type UserInfoContainerProps = {
@@ -13,9 +12,7 @@ type UserInfoContainerProps = {
   username: string;
   type: string;
   date: Date;
-  isFollowing?: boolean;
   content: string;
-  followersCount?: number;
 };
 
 export const UserInfoContainer = ({
@@ -23,10 +20,8 @@ export const UserInfoContainer = ({
   altimage,
   username,
   date,
-  type,
-  isFollowing,
+  // type,
   content,
-  followersCount,
 }: UserInfoContainerProps) => {
   return (
     <div className="my-3 flex flex-row items-start">
@@ -44,18 +39,22 @@ export const UserInfoContainer = ({
             </div>
             <p className="text-okei-secondary">{content}</p>
           </div>
-          {type === "FOLLOW" && (
+          {/* TODO */}
+          {/* {type === "FOLLOW" && (
             <Button
+              onClick={(e) => {
+                e.preventDefault();
+              }}
               variant="outline"
               className="h-[34px] min-w-28 rounded-xl text-[15px] font-semibold text-okei-primary"
             >
-              {isFollowing ? "Follow back" : "Follow"}
+              Follow back
             </Button>
-          )}
+          )} */}
         </div>
-        {followersCount ? (
+        {/* {followersCount ? (
           <p className="mt-1.5 text-okei-primary">{`${followersCount} followers`}</p>
-        ) : null}
+        ) : null} */}
         <Separator className="bg-okei-secondary/30" />
       </div>
     </div>

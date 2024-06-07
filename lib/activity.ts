@@ -1,35 +1,30 @@
 import { db } from "@/lib/db";
 
-import { ActivityWithUser } from "@/types";
-import { currentUser } from "./auth";
-
-export const getAllActivity = async (): Promise<ActivityWithUser[] | null> => {
-  const user = await currentUser();
-
+export const getAllActivity = async (userId: string) => {
   try {
     const activities = await db.activity.findMany({
+      where: {
+        receiverId: userId,
+        NOT: {
+          performerId: userId,
+        },
+      },
       include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            username: true,
-            email: true,
-            emailVerified: true,
-            hasActivity: true,
-            image: true,
-            role: true,
+        performer: true,
+        receiver: true,
+        follow: {
+          include: {
+            follower: true,
+            following: true,
           },
         },
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: { createdAt: "desc" },
     });
 
     await db.user.update({
       where: {
-        id: user.id,
+        id: userId,
       },
       data: {
         hasActivity: false,

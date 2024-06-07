@@ -18,6 +18,12 @@ enum UserRole {
   USER
 }
 
+enum ActivityType {
+  LIKE
+  FOLLOW
+  COMMENT
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -29,12 +35,13 @@ model User {
   role          UserRole  @default(USER)
   hasActivity   Boolean?  @default(false)
 
-  posts      Post[]
-  likes      Like[]
-  comments   Comment[]
-  followers  Follow[]   @relation("follower")
-  followings Follow[]   @relation("following")
-  activities Activity[]
+  posts         Post[]
+  likes         Like[]
+  comments      Comment[]
+  followers     Follow[]   @relation("follower")
+  followings    Follow[]   @relation("following")
+  activities    Activity[] @relation("activity_performer")
+  notifications Activity[] @relation("activity_receiver")
 
   @@map("users")
 }
@@ -63,14 +70,15 @@ model Like {
 }
 
 model Comment {
-  id        String   @id @default(cuid())
-  content   String   @db.Text
-  userId    String
-  postId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String     @id @default(cuid())
+  content    String     @db.Text
+  userId     String
+  postId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post       Post       @relation(fields: [postId], references: [id], onDelete: Cascade)
+  activities Activity[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 }
 
 model Follow {
@@ -78,23 +86,32 @@ model Follow {
   followerId  String
   followingId String
 
-  follower  User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
-  following User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  follower   User       @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following  User       @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  activities Activity[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
   @@unique([followerId, followingId])
   @@map("follows")
 }
 
 model Activity {
-  id        String   @id @default(cuid())
-  content   String   @db.Text
-  type      String
-  userId    String
-  postId    String?
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String       @id @default(cuid())
+  type        ActivityType
+  performerId String
+  receiverId  String?
+  postId      String?
+  commentId   String?
+  followId    String?
+  content     String?      @db.Text
+  createdAt   DateTime     @default(now())
+
+  performer User     @relation("activity_performer", fields: [performerId], references: [id], onDelete: Cascade)
+  receiver  User?    @relation("activity_receiver", fields: [receiverId], references: [id], onDelete: Cascade)
   post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  follow    Follow?  @relation(fields: [followId], references: [id], onDelete: Cascade)
+
+  @@map("activities")
 }

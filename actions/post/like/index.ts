@@ -63,9 +63,10 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       await db.activity.create({
         data: {
           type: "LIKE",
-          content: "Liked your post",
-          userId: user.id,
+          performerId: user.id,
+          receiverId: existingPost.userId,
           postId: existingPost.id,
+          content: "Liked your post",
         },
       });
 

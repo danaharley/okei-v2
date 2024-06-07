@@ -64,9 +64,6 @@ export const getPostById = async (id: string) => {
               },
             },
           },
-          orderBy: {
-            createdAt: "desc",
-          },
         },
       },
     });

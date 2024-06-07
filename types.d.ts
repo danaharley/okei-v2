@@ -61,4 +61,6 @@ export type PostWithUserWithLikeWithComment = Post & {
   comments: CommentWithUser[];
 };
 
-export type ActivityWithUser = Activity & { user: UserWithoutPassword };
+export type ActivityWithUserWithFollow = Activity & {
+  user: UserWithoutPassword;
+} & { follow: Follow };

@@ -41,9 +41,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     await db.activity.create({
       data: {
         type: "COMMENT",
-        content: "Commented on your post",
-        userId: user.id,
+        performerId: user.id,
+        receiverId: existingPost.userId,
         postId: existingPost.id,
+        commentId: comment.id,
+        content: "Commented on your post",
       },
     });
 
