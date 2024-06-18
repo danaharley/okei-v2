@@ -64,6 +64,8 @@ model Post {
   activities Activity[]
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+
+  @@map("posts")
 }
 
 model Like {
@@ -74,6 +76,8 @@ model Like {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("likes")
 }
 
 model Comment {
@@ -86,6 +90,8 @@ model Comment {
   activities Activity[]
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+
+  @@map("comments")
 }
 
 model Follow {
