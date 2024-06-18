@@ -16,14 +16,6 @@ const ActivityPage = async () => {
 
   const activities = await getAllActivity(user.id);
 
-  // if (!activities) {
-  //   return (
-  //     <div className="p-8 text-center">
-  //       <p className="font-semibold">No Activity.</p>
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
       {activities && activities.length ? (
@@ -37,7 +29,7 @@ const ActivityPage = async () => {
             key={activity.id}
           >
             <UserInfoContainer
-              type={activity.type}
+              // type={activity.type}
               userImage={
                 activity.performer.image
                   ? activity.performer.image
